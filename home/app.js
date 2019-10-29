@@ -3,33 +3,45 @@ import htmlToDOM from '../util/html-to-DOM.js';
 import images from '../data/images.js';
 
 const list = document.querySelector('.creatures');
-const keywordFilter = document.querySelector('keyword-filter');
 
-keywordFilter.addEventListener('change', () => {
-    const filter = keywordFilter.nodeValue;
-    let filteredCreatures = null;
-
-    if (!filter) {
-        filteredCreatures = images;
-    }
-    else {
-        filteredCreatures = images.filter(image =>
-        {
-            return image.type === filter;
-        });
-    }
-
-    render(filteredCreatures);
+images.forEach(image => {
+    const htmlString = renderCreatures(image);
+    const dom = htmlToDOM(htmlString);
+    list.appendChild(dom);
 });
 
-function render(creaturesToRender) {
-    while (list.lastElementChild) {
-        list.lastElementChild.remove();
-    }
+// const keywordFilter = document.querySelector('keyword-filter');
 
-    creaturesToRender.forEach(image => {
-        const html = renderCreatures(image);
-        const dom = htmlToDOM(html);
-        list.appendChild(dom);
-    });
-}
+// keywordFilter.addEventListener('change', () => {
+    
+//     const filter = keywordFilter.value;
+//     let filteredCreatures = null;
+
+//     if (!filter) {
+//         filteredCreatures = images;
+//     }
+//     else {
+//         filteredCreatures = images.filter(image =>
+//         {
+//             if (image.type === filter) {
+//                 return true;
+//             } else {
+//                 return false;
+//             }
+//         });
+//     }
+
+//     render(filteredCreatures);
+// });
+
+// function render(creaturesToRender) {
+//     while (list.lastElementChild) {
+//         list.lastElementChild.remove();
+//     }
+
+//     creaturesToRender.forEach(image => {
+//         const html = renderCreatures(image);
+//         const dom = htmlToDOM(html);
+//         list.appendChild(dom);
+//     });
+// }
